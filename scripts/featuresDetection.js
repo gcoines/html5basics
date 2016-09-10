@@ -1,25 +1,23 @@
-function printHTML5FeaturesAvailability() {
-    printModernizrFeatures();
-}
+var Html5Basics = Html5Basics || {};
+Html5Basics.Features = Html5Basics.Features || {};
+Html5Basics.Features.Detection = Html5Basics.Features.Detection || (function () {
 
-function printModernizrFeatures() {
-    var htmlNode = document.getElementById('features');
-    printFeatures(htmlNode, Modernizr);
-}
+    //Private references, once having added private scope thorugh Module Pattern
+    var htmlNode = null;
 
-function printFeatures(htmlNode, featuresContainer) {
-    for (var feature in featuresContainer) {
-        printFeature(htmlNode, feature, featuresContainer);
+    function showFeatures(node) {
+        htmlNode = node;
+        if(htmlNode == null)
+            throw 'No HtmlNode specified';
+
+        //Print features detected through Modernizr
+        var featuresPrinter = new Html5Basics.Features.Printer(Modernizr);
+        htmlNode.innerHTML = featuresPrinter.printAllFeatures();
     }
-}
 
-function printFeature(htmlNode, feature, featureContainer) {
+    //Revealing Module Pattern
+    return {
+        printFeatures: showFeatures
+    };
 
-    var type = typeof (featureContainer[feature]);
-    if (type == "object") {
-        htmlNode.innerHTML += '- ' + feature + ':<br />';
-        printFeatures(featureContainer[feature]);
-    }
-    else if (type != "function")
-        htmlNode.innerHTML += feature + ': ' + featureContainer[feature] + '<br/>';
-}
+})();
