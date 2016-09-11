@@ -12,7 +12,21 @@
     <div id="features">
     </div>
     <script>        
-        Html5Basics.Features.Detection.printFeatures(document.getElementById('features'));
+        var featuresDiv = document.getElementById('features');
+        Html5Basics.Features.Detector.printFeatures(featuresDiv);
+
+        //Detection Technique 1: Check  for  property on a global object
+        var doesWindowSupportGeolocation = Html5Basics.Features.Detector.isFeatureAvailableOnGlobalObject(window, 'geolocation');
+        var doesNavigatorSupportGeolocation = Html5Basics.Features.Detector.isFeatureAvailableOnGlobalObject(navigator, 'geolocation');
+        
+        //Detection Technique 2: Check for property on a recently created element
+        var doesDocumentSupportCanvas = Html5Basics.Features.Detector.isFeatureElementAvailable('canvas');
+
+        //Detection Technique 3: Check for function on a recently created element and evaluate its value
+        var doesDocumentSupportVideoTypeMp4 = Html5Basics.Features.Detector.isFeatureElementAvailableFor('video', 'canPlayType', 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+
+        //Detection Technique 4: Set a property for a created element and evaluate its state
+        var doesDocumentSupportInputPlaceholder = Html5Basics.Features.Detector.isFeatureElementAttributeAvailable('input', 'placeholder', 'hello');
     </script>
 </body>
 
