@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas Drawings</title>
+    <script src="./scripts/canvasDrawer.js"></script>
+</head>
+
+<body>
+    <div>
+        <canvas id="drawingPane" width="600"  height="600"></canvas>
+    </div>
+    <script>        
+        //Instantiate an object to draw few forms within canvas
+        var canvasNode = document.getElementById('drawingPane');
+        Html5Basics.Drawing.CanvasDrawer.setCanvasElement(canvasNode);
+        Html5Basics.Drawing.CanvasDrawer.drawRectangle(10, 10, 50, 100);
+
+        Html5Basics.Drawing.CanvasDrawer.drawRandomPencilPath(120, 120, 2, "blue");
+        Html5Basics.Drawing.CanvasDrawer.drawText(70, 26, "Hello World!", "bold 16px sans-serif")
+    </script>
+</body>
+
+</html>
