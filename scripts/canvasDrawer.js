@@ -44,6 +44,19 @@ Html5Basics.Drawing.CanvasDrawer = Html5Basics.Drawing.CanvasDrawer || (function
     //TODO few more text properties...
 
     //Gradients
+    function gradientLinear(x0, y0, x1, x2) {
+        return context2D.createLinearGradient(x0, y0, x1, x2);
+    }
+
+    function gradientRadial(x0, y0, r0, x1, x2, r1) {
+        return context2D.createRadialGradient(x0, y0, r0, x1, x2, r1);
+    }
+
+    function gradientAddTransition(gradient, transitionNumber, color) {
+        gradient.addColorStop(transitionNumber, color);
+    }
+
+    //Images
     
 
     //Drawing methods
@@ -68,6 +81,26 @@ Html5Basics.Drawing.CanvasDrawer = Html5Basics.Drawing.CanvasDrawer || (function
         textWrite(x, y, text);
     }
 
+    function drawRectangleGradientLinear(x, y, width, height) {
+        var gradient = gradientLinear(x, y, x + width, y + height);
+        gradientAddTransition(gradient, 0.0, "green");
+        gradientAddTransition(gradient, 0.3, "white");
+        gradientAddTransition(gradient, 0.6, "white");
+        gradientAddTransition(gradient, 1, "yellow");
+        context2D.fillStyle = gradient;
+        drawRectangle(x, y, width, height);
+    }
+
+    function drawRectangleGradientRadial(x, y, width, height, r0, r1) {
+        var gradient = gradientRadial(x, y, r0, x + width, y + height, r1);
+        gradientAddTransition(gradient, 0.0, "green");
+        gradientAddTransition(gradient, 0.3, "white");
+        gradientAddTransition(gradient, 0.6, "white");
+        gradientAddTransition(gradient, 1, "yellow");
+        context2D.fillStyle = gradient;
+        drawRectangle(x, y, width, height);
+    }
+
     //Clear methods
     function clearRectangle(x, y, width, height) {
         context2D.clearRect(x, y, width, height);
@@ -78,7 +111,9 @@ Html5Basics.Drawing.CanvasDrawer = Html5Basics.Drawing.CanvasDrawer || (function
         setCanvasElement: setCanvasElement,
         drawRectangle: drawRectangle,
         drawRandomPencilPath: drawRandomPencilPath,
-        drawText: drawText
+        drawText: drawText,
+        drawRectangleGradientLinear: drawRectangleGradientLinear,
+        drawRectangleGradientRadial: drawRectangleGradientRadial
     };
 
 })();
