@@ -57,7 +57,13 @@ Html5Basics.Drawing.CanvasDrawer = Html5Basics.Drawing.CanvasDrawer || (function
     }
 
     //Images
-    
+    function drawImage(src, x0, y0, width, height){
+        var img = new Image();
+        img.src = src;
+        img.onload = function(){
+            context2D.drawImage(img, x0, y0);
+        };
+    }
 
     //Drawing methods
     function drawRectangle(x, y, width, height) {
@@ -113,7 +119,8 @@ Html5Basics.Drawing.CanvasDrawer = Html5Basics.Drawing.CanvasDrawer || (function
         drawRandomPencilPath: drawRandomPencilPath,
         drawText: drawText,
         drawRectangleGradientLinear: drawRectangleGradientLinear,
-        drawRectangleGradientRadial: drawRectangleGradientRadial
+        drawRectangleGradientRadial: drawRectangleGradientRadial,
+        drawImage: drawImage
     };
 
 })();
